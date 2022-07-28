@@ -1,6 +1,9 @@
 
 import pandas as pd
 
+from tabulate import tabulate
+
+from termcolor import colored
 
 
 def essentialCreation(type):
@@ -47,17 +50,24 @@ def essentialCreation(type):
 
     # we rename the column names to something appropriate
 
-    essential_package.columns = ["Must have | ", " Nice to have | ", "Longer stays | ", "Abroad |",]
+    essential_package.columns = [
+        colored("Must have", "yellow"),
+        colored("Nice to have", "yellow"),
+        colored("Longer stays", "yellow"),
+        colored("Abroad", "yellow")]
 
-    not_abroad_package = essential_package[["Must have | ", " Nice to have | ", "Longer stays | "]]
+    not_abroad_package = essential_package[[
+        colored("Must have", "yellow"),
+        colored("Nice to have", "yellow"),
+        colored("Longer stays", "yellow")]]
 
     if(type.upper() == "ABROAD"):
 
-        return(essential_package)
+        return(tabulate(essential_package, headers = "keys", tablefmt = "psql"))
     
     elif(type.upper() == "NOT ABROAD"):
 
-        return(not_abroad_package)
+        return(tabulate(not_abroad_package, headers= "keys", tablefmt = "psql"))
 
     else:
 
@@ -76,38 +86,249 @@ def entertainmentCreation():
     entertainment_package = ["Reading material", "Laptop", "gaming devices", "Chargers", "Powerbank", "Cards / dices", "Board games", "Ball games"]
 
 
-def skiingCreation():
+def skiingCreation(type,transport, stay):
 
+    ### --------------------------------------------------- FUNCTION DESCRIPTION -----------------------------------------------###
 
+    ## INPUTS ##
+    # type: Wether the user wants to do skiing or snowboarding
+    # transport: How they will travel to the said location
+    # Stay: Where they will be staying during their skiing holiday
+
+    
     # ------------------------------------------------------- Skiing Package -----------------------------------------------------#
 
     # skiing clothes list
 
     skiing_clothes = ["Underwear", "Casual clothes", "Skiing underwear", "Inner layer", "Skiing socks", "Skiing jacket", "Skiing trousers", "Beanie", "Mittens", "Buff", "Swimwear"]
 
+    skiing_clothes_dataframe = pd.DataFrame(skiing_clothes)
+
     # Skiing gear that is a must list
 
     skiing_gear_must_have = ["Ski","Backpack (preferably water-proof)", "boots", "Helmet", "Carapace", "Goggles", "Ski poles"]
+
+    skiing_gear_must_dataframe = pd.DataFrame(skiing_gear_must_have)
 
     # Skiing gear that is nice to have list
 
     skiing_gear_nice_have = ["Go pro", "Gear for avalanches", "Hand / feet warmers", "cooling / heating blanket", "Ski lubricant"]
 
+    skiing_gear_nice_dataframe = pd.DataFrame(skiing_gear_nice_have)
+
     # Snowboard gear that is a must list
 
     snowboard_gear_must_have = ["Helmet", "Carapace", "Goggles", "Snowboard", "Snowboard boots"]
+
+    snowboard_gear_must_dataframe = pd.DataFrame(snowboard_gear_must_have)
 
     # Skiing cross country gear list
 
     skiing_cross_country_gear = ["Ski", "Ski poles", "Ski lubricant"]
 
+    skiing_cross_country_dataframe = pd.DataFrame(skiing_cross_country_gear)
+
     # Items to take or stuff to do if you stay in a hut
 
     skiing_hut = ["Linens", "Towels", "Food", "check for facilities in the hut"]
 
+    skiing_hut_dataframe = pd.DataFrame(skiing_hut)
+
     # items to take or stuff to do if you stay in a hotel / hostel
 
-    skiing_hotel_hostel = ["Linens if necessary"]
+    skiing_hotel_hostel = ["Linens if necessary", "HOTEL"]
+
+    skiing_hotel_hostel_dataframe = pd.DataFrame(skiing_hotel_hostel)
+
+    skiing_boatandcar_transport = ["Toilet gadgets", "Entertainment", "Swimwear", "Clothes", "BOATCAR"]
+
+    skiing_boatandcar_transport_dataframe = pd.DataFrame(skiing_boatandcar_transport)
+
+    skiing_flight_transport = ["Passport", "Entertainment", "Neck Pillow", "PLANE"]
+
+    skiing_flight_transport_dataframe = pd.DataFrame(skiing_flight_transport)
+
+    skiing_car_transport = ["Entertainment", "CAR RIDE"]
+
+    skiing_car_transport_dataframe = pd.DataFrame(skiing_car_transport)
+
+
+    # bunch of if-statements 
+
+    if(type == "SKI" and (transport == "BOAT" or transport == "CAR AND BOAT") and stay == "HUT"):
+
+        skiing_package = pd.concat([
+        skiing_clothes_dataframe, 
+        skiing_gear_must_dataframe, 
+        skiing_gear_nice_dataframe,
+        skiing_boatandcar_transport_dataframe,
+        skiing_hut_dataframe],
+        ignore_index = True, axis = 1)
+
+        skiing_package.columns = [
+        colored("Skiing clothes", "yellow"),
+        colored("Must skiing gear", "yellow"),
+        colored("Optional skiing gear", "yellow"),
+        colored("Transport items", "yellow"),
+        colored("Stay items", "yellow")]
+
+
+
+        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+    
+    if(type == "SKI" and (transport == "BOAT" or transport == "CAR AND BOAT") and (stay == "HOTEL" or stay == "HOSTEL")):
+        
+        
+        skiing_package = pd.concat([
+        skiing_clothes_dataframe, 
+        skiing_gear_must_dataframe, 
+        skiing_gear_nice_dataframe,
+        skiing_boatandcar_transport_dataframe,
+        skiing_hotel_hostel_dataframe],
+        ignore_index = True, axis = 1)
+
+        skiing_package.columns = [
+        colored("Skiing clothes", "yellow"),
+        colored("Must skiing gear", "yellow"),
+        colored("Optional skiing gear", "yellow"),
+        colored("Transport items", "yellow"),
+        colored("Stay items", "yellow")]
+
+        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+
+    if(type == "SKI" and (transport == "BOAT" or transport == "CAR AND BOAT") and stay == "OTHER"):
+
+        skiing_package = pd.concat([
+        skiing_clothes_dataframe, 
+        skiing_gear_must_dataframe, 
+        skiing_gear_nice_dataframe,
+        skiing_boatandcar_transport_dataframe],
+        ignore_index = True, axis = 1)
+
+        skiing_package.columns = [
+        colored("Skiing clothes", "yellow"),
+        colored("Must skiing gear", "yellow"),
+        colored("Optional skiing gear", "yellow"),
+        colored("Transport items", "yellow")]
+
+        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+    
+
+    if(type == "SKI" and transport == "PLANE" and (stay == "HOTEL" or stay == "HOSTEL")):
+
+        skiing_package = pd.concat([
+        skiing_clothes_dataframe, 
+        skiing_gear_must_dataframe, 
+        skiing_gear_nice_dataframe,
+        skiing_flight_transport_dataframe,
+        skiing_hotel_hostel_dataframe],
+        ignore_index = True, axis = 1)
+
+        skiing_package.columns = [
+        colored("Skiing clothes", "yellow"),
+        colored("Must skiing gear", "yellow"),
+        colored("Optional skiing gear", "yellow"),
+        colored("Transport items", "yellow"),
+        colored("Stay items", "yellow")]
+
+        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+
+    if(type == "SKI" and transport == "PLANE" and stay == "HUT"):
+
+        skiing_package = pd.concat([
+        skiing_clothes_dataframe, 
+        skiing_gear_must_dataframe, 
+        skiing_gear_nice_dataframe,
+        skiing_flight_transport_dataframe,
+        skiing_hut_dataframe],
+        ignore_index = True, axis = 1)
+
+        skiing_package.columns = [
+        colored("Skiing clothes", "yellow"),
+        colored("Must skiing gear", "yellow"),
+        colored("Optional skiing gear", "yellow"),
+        colored("Transport items", "yellow"),
+        colored("Stay items", "yellow")]
+
+        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+
+    if(type == "SKI" and transport == "PLANE" and stay == "OTHER"):
+
+        skiing_package = pd.concat([
+        skiing_clothes_dataframe, 
+        skiing_gear_must_dataframe, 
+        skiing_gear_nice_dataframe,
+        skiing_flight_transport_dataframe],
+        ignore_index = True, axis = 1)
+
+        skiing_package.columns = [
+        colored("Skiing clothes", "yellow"),
+        colored("Must skiing gear", "yellow"),
+        colored("Optional skiing gear", "yellow"),
+        colored("Transport items", "yellow")]
+
+        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+
+
+    if(type == "SKI" and transport == "CAR" and stay == "OTHER"):
+
+        skiing_package = pd.concat([
+        skiing_clothes_dataframe, 
+        skiing_gear_must_dataframe, 
+        skiing_gear_nice_dataframe,
+        skiing_car_transport_dataframe],
+        ignore_index = True, axis = 1)
+
+        skiing_package.columns = [
+        colored("Skiing clothes", "yellow"),
+        colored("Must skiing gear", "yellow"),
+        colored("Optional skiing gear", "yellow"),
+        colored("Transport items", "yellow")]
+
+        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+
+    if(type == "SKI" and transport == "CAR" and (stay == "HOTEL" or stay == "HOSTEL")):
+
+        skiing_package = pd.concat([
+        skiing_clothes_dataframe, 
+        skiing_gear_must_dataframe, 
+        skiing_gear_nice_dataframe,
+        skiing_car_transport_dataframe,
+        skiing_hotel_hostel_dataframe],
+        ignore_index = True, axis = 1)
+
+        skiing_package.columns = [
+        colored("Skiing clothes", "yellow"),
+        colored("Must skiing gear", "yellow"),
+        colored("Optional skiing gear", "yellow"),
+        colored("Transport items", "yellow"),
+        colored("Stay items", "yellow")]
+
+        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+
+    if(type == "SKI" and transport == "CAR" and stay == "HUT"):
+
+        skiing_package = pd.concat([
+        skiing_clothes_dataframe, 
+        skiing_gear_must_dataframe, 
+        skiing_gear_nice_dataframe,
+        skiing_car_transport_dataframe,
+        skiing_hut_dataframe],
+        ignore_index = True, axis = 1)
+
+        skiing_package.columns = [
+        colored("Skiing clothes", "yellow"),
+        colored("Must skiing gear", "yellow"),
+        colored("Optional skiing gear", "yellow"),
+        colored("Transport items", "yellow"),
+        colored("Stay items", "yellow")]
+
+        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+        
+        
+    # type = snowboard
+    
+
 
 
 def campingCreation():

@@ -7,6 +7,8 @@ import pandas as pd
 
 import numpy as np
 
+import tabulate # to customize the pandas dataframe even more and look cleaner
+
 import time as timer
 
 from displayMenu import displayMenu # menu-creator function
