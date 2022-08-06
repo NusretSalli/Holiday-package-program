@@ -57,7 +57,6 @@ while True:
 
     print("------------------------------", colored("Please choose one of the options", "green"), "---------------------------------------------------")
 
-
     main_menu = np.array(["New holiday", "Saved holiday packages", "Quit"])
 
     choice = displayMenu(main_menu)
@@ -99,7 +98,9 @@ while True:
 
                 # we print the essential package for abroad
 
-                print(PackageCreation.essentialCreation("ABROAD"))
+                abroad_package = PackageCreation.essentialCreation("ABROAD")
+
+                print(abroad_package.to_markdown())
 
                 # we ask what the user wants to do with the given package
 
@@ -115,7 +116,7 @@ while True:
 
                     package_name = str(input("What should the package be called?: "))
 
-                    new_package_dict = {package_name: PackageCreation.essentialCreation("ABROAD"), "Back to main menu": "Back"}
+                    new_package_dict = {package_name: abroad_package, "Back to main menu": "Back"}
 
                     # we delete the key "back to main menu" and its value to put it at the end every time a new package is saved
 
@@ -129,6 +130,8 @@ while True:
                 if(package_given_choice == 2): # if the user wants to edit the package
 
                     placeholder = 2
+
+
 
                 
                 if(package_given_choice == 3): # if the user wants to save the package in a CSV-file
@@ -148,7 +151,9 @@ while True:
 
                 # print the essential package when it is NOT ABROAD
 
-                print(PackageCreation.essentialCreation("NOT ABROAD"))
+                not_abroad_package = PackageCreation.essentialCreation("NOT ABROAD")
+
+                print(not_abroad_package.to_markdown())
 
                 # We ask what the user wants to do with the package
 
@@ -162,7 +167,7 @@ while True:
 
                     package_name = str(input("What should the package be called?: "))
 
-                    new_package_dict = {package_name: PackageCreation.essentialCreation("NOT ABROAD"), "Back to main menu": "Back"}
+                    new_package_dict = {package_name: not_abroad_package, "Back to main menu": "Back"}
 
                     del saved_package_dict["Back to main menu"]
 
@@ -201,9 +206,8 @@ while True:
 
             saved_package_choice = displayMenu(saved_package_list)
 
-            # if the user chooses one of the packages
             
-            if(saved_package_choice != saved_package_list.index("Back to main menu")+1):
+            if(saved_package_choice != saved_package_list.index("Back to main menu")+1): # if the user chooses one of the packages
                 
                 # we store the key that has been selected by the user
 
@@ -223,12 +227,32 @@ while True:
 
                     desired_package = saved_package_dict[selected_key]
 
-                    print(desired_package)
+                    print(desired_package.to_markdown())
 
                 
                 if(package_menu_choice == 2): # if the user wants to edit the package
 
-                    placeholder = 2
+                    print(saved_package_dict[selected_key].to_markdown())
+
+                    print("-------------------------------", colored("Which column do you want to edit?", "green"), "---------------------")
+
+                    selected_dataframe = saved_package_dict[selected_key]
+
+                    edit_list = selected_dataframe.columns
+
+                    print(edit_list)
+
+                    edit_choice = int(displayMenu(edit_list)) # the number
+
+                    # if the number is not back to main menu or add a new column:
+                    # DO IT HERE
+                    
+                    # if the user has picked an existing data frame
+
+                    edit_column = list(selected_dataframe.iloc[:, edit_choice-1])
+        
+
+
 
 
                 if(package_menu_choice == 3): # if the user wants to delete the package
@@ -242,8 +266,6 @@ while True:
                         del saved_package_dict[selected_key]
 
                         print(colored("\nThe package " + selected_key + " has been permenantely deleted", "yellow"))
-
-
 
 
     if(choice == 3): # if the user wants to exit the program

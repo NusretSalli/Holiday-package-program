@@ -8,8 +8,6 @@ from termcolor import colored
 
 def essentialCreation(type):
 
-
-
     #------------------------------------------------- Essential Package ---------------------------------------------------------#
 
     # our must have list
@@ -63,18 +61,15 @@ def essentialCreation(type):
 
     if(type.upper() == "ABROAD"):
 
-        return(tabulate(essential_package, headers = "keys", tablefmt = "psql"))
+        return(essential_package)
     
     elif(type.upper() == "NOT ABROAD"):
 
-        return(tabulate(not_abroad_package, headers= "keys", tablefmt = "psql"))
+        return(not_abroad_package)
 
     else:
 
         pass
-
-
-
 
 
 def entertainmentCreation():
@@ -176,7 +171,7 @@ def skiingCreation(type, transport, stay):
 
 
 
-        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+        return(skiing_package)
     
     if(type == "SKI" and (transport == "BOAT" or transport == "CAR AND BOAT") and (stay == "HOTEL" or stay == "HOSTEL")):
         
@@ -196,7 +191,7 @@ def skiingCreation(type, transport, stay):
         colored("Transport items", "yellow"),
         colored("Stay items", "yellow")]
 
-        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+        return(skiing_package)
 
     if(type == "SKI" and (transport == "BOAT" or transport == "CAR AND BOAT") and stay == "OTHER"):
 
@@ -213,7 +208,7 @@ def skiingCreation(type, transport, stay):
         colored("Optional skiing gear", "yellow"),
         colored("Transport items", "yellow")]
 
-        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+        return(skiing_package)
     
 
     if(type == "SKI" and transport == "PLANE" and (stay == "HOTEL" or stay == "HOSTEL")):
@@ -233,7 +228,7 @@ def skiingCreation(type, transport, stay):
         colored("Transport items", "yellow"),
         colored("Stay items", "yellow")]
 
-        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+        return(skiing_package)
 
     if(type == "SKI" and transport == "PLANE" and stay == "HUT"):
 
@@ -252,7 +247,7 @@ def skiingCreation(type, transport, stay):
         colored("Transport items", "yellow"),
         colored("Stay items", "yellow")]
 
-        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+        return(skiing_package)
 
     if(type == "SKI" and transport == "PLANE" and stay == "OTHER"):
 
@@ -269,7 +264,7 @@ def skiingCreation(type, transport, stay):
         colored("Optional skiing gear", "yellow"),
         colored("Transport items", "yellow")]
 
-        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+        return(skiing_package)
 
 
     if(type == "SKI" and transport == "CAR" and stay == "OTHER"):
@@ -287,7 +282,7 @@ def skiingCreation(type, transport, stay):
         colored("Optional skiing gear", "yellow"),
         colored("Transport items", "yellow")]
 
-        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+        return(skiing_package)
 
     if(type == "SKI" and transport == "CAR" and (stay == "HOTEL" or stay == "HOSTEL")):
 
@@ -306,7 +301,7 @@ def skiingCreation(type, transport, stay):
         colored("Transport items", "yellow"),
         colored("Stay items", "yellow")]
 
-        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+        return(skiing_package)
 
     if(type == "SKI" and transport == "CAR" and stay == "HUT"):
 
@@ -325,7 +320,7 @@ def skiingCreation(type, transport, stay):
         colored("Transport items", "yellow"),
         colored("Stay items", "yellow")]
 
-        return(tabulate(skiing_package, headers= "keys", tablefmt="psql"))
+        return(skiing_package)
 
 
     # if statements if the type = Snowboards
@@ -343,7 +338,7 @@ def skiingCreation(type, transport, stay):
         colored("Transport items", "yellow"),
         colored("Stay items", "yellow")]
 
-        return(tabulate(snowboard_package, headers= "keys", tablefmt="psql"))
+        return(snowboard_package)
     
     if(type == "SNOWBOARD" and (transport == "BOAT" or transport == "CAR AND BOAT") and stay == "OTHER"):
 
@@ -356,7 +351,7 @@ def skiingCreation(type, transport, stay):
         colored("Snowboard must gear", "yellow"),
         colored("Transport items", "yellow")]
 
-        return(tabulate(snowboard_package, headers= "keys", tablefmt="psql"))
+        return(snowboard_package)
     
     if(type == "SNOWBOARD" and (transport == "BOAT" or transport == "CAR AND BOAT") and (stay == "HOTEL" or stay == "HOSTEL")):
 
@@ -371,7 +366,7 @@ def skiingCreation(type, transport, stay):
         colored("Transport items", "yellow"),
         colored("Stay items", "yellow")]
 
-        return(tabulate(snowboard_package, headers= "keys", tablefmt="psql"))
+        return(snowboard_package)
     
 
     if(type == "SNOWBOARD" and transport == "PLANE" and (stay == "HOTEL" or stay == "HOSTEL")):
@@ -387,7 +382,7 @@ def skiingCreation(type, transport, stay):
         colored("Transport items", "yellow"),
         colored("Stay items", "yellow")]
 
-        return(tabulate(snowboard_package, headers= "keys", tablefmt="psql"))
+        return(snowboard_package)
     
     if(type == "SNOWBOARD" and transport == "PLANE" and stay == "HUT"):
 
@@ -402,7 +397,7 @@ def skiingCreation(type, transport, stay):
         colored("Transport items", "yellow"),
         colored("Stay items", "yellow")]
 
-        return(tabulate(snowboard_package, headers= "keys", tablefmt="psql"))
+        return(snowboard_package)
     
     if(type == "SNOWBOARD" and transport == "PLANE" and stay == "OTHER"):
 
@@ -415,12 +410,10 @@ def skiingCreation(type, transport, stay):
         colored("Snowboard must gear", "yellow"),
         colored("Transport items", "yellow")]
 
-        return(tabulate(snowboard_package, headers= "keys", tablefmt="psql"))
+        return(snowboard_package)
 
 
     if(type == "SNOWBOARD" and transport == "CAR" and stay == "OTHER"):
-
-    
 
         snowboard_package = pd.concat([
         snowboard_gear_must_dataframe,
@@ -431,7 +424,7 @@ def skiingCreation(type, transport, stay):
         colored("Snowboard must gear", "yellow"),
         colored("Transport items", "yellow")]
 
-        return(tabulate(snowboard_package, headers= "keys", tablefmt="psql"))
+        return(snowboard_package)
 
     if(type == "SNOWBOARD" and transport == "CAR" and (stay == "HOTEL" or stay == "HOSTEL")):
 
@@ -446,7 +439,7 @@ def skiingCreation(type, transport, stay):
         colored("Transport items", "yellow"),
         colored("Stay items", "yellow")]
 
-        return(tabulate(snowboard_package, headers= "keys", tablefmt="psql"))
+        return(snowboard_package)
     
     if(type == "SNOWBOARD" and transport == "CAR" and stay == "HUT"):
 
@@ -461,8 +454,7 @@ def skiingCreation(type, transport, stay):
         colored("Transport items", "yellow"),
         colored("Stay items", "yellow")]
 
-        return(tabulate(snowboard_package, headers= "keys", tablefmt="psql"))
-
+        return(snowboard_package)
 
 
 def campingCreation(activity, stay_camp):
@@ -512,7 +504,7 @@ def campingCreation(activity, stay_camp):
         colored("Tent items", "yellow"),
         colored("Consumeables items", "yellow")]
 
-        return(tabulate(camping_package, headers= "keys", tablefmt="psql"))
+        return(camping_package)
     
     if(activity == "HIKING" and (stay_camp == "HOTEL" or stay_camp == "HOSTEL")):
 
@@ -525,7 +517,7 @@ def campingCreation(activity, stay_camp):
         colored("Hiking items", "yellow"),
         colored("Hotel / hostel items", "yellow")]
 
-        return(tabulate(camping_package, headers= "keys", tablefmt="psql"))
+        return( camping_package)
     
     if(activity == "BIKING" and stay_camp == "TENT"):
 
@@ -540,7 +532,7 @@ def campingCreation(activity, stay_camp):
         colored("Tent items", "yellow"),
         colored("Consumeables items", "yellow")]
 
-        return(tabulate(camping_package, headers= "keys", tablefmt="psql"))
+        return(camping_package)
 
 
     if(activity == "BIKING" and (stay_camp == "HOTEL" or stay_camp == "HOSTEL")):
@@ -554,22 +546,59 @@ def campingCreation(activity, stay_camp):
         colored("Biking items", "yellow"),
         colored("Hotel / hostel items", "yellow")]
 
-        return(tabulate(camping_package, headers= "keys", tablefmt="psql"))
+        return(camping_package)
 
 
-def bigcityCreation():
+def bigcityCreation(transport):
 
-     # ------------------------------------------------------- Big city holiday --------------------------------------------------#
+    # ------------------------------------------------------- Big city holiday --------------------------------------------------#
+
+    # stuff to take with you during your big city holiday
+
+    big_city_stuff = ["Shoes for hiking", "belt bag", "OTHER STUFF?"]
+
+    big_city_stuff_dataframe = pd.DataFrame(big_city_stuff)
 
     # Stuff to take with you if you will take a flight
 
     city_flight = ["Shoes for traveling", "Entertainment", "hand luggage for 100 ml item"]
 
+    city_flight_dataframe = pd.DataFrame(city_flight)
+
     # Stuff to take with you if you will not take a flight
 
     city_no_flight = ["Shoes for traveling","Entertainment"]
 
+    city_no_flight_dataframe = pd.DataFrame(city_no_flight)
+
+
+
+    if(transport == "FLIGHT"):
+
+        big_city_package = pd.concat([
+        big_city_stuff_dataframe,
+        city_flight_dataframe],
+        ignore_index= True, axis = 1)
+
+        big_city_package.columns = [
+        colored("Big city items", "yellow"),
+        colored("Transport items", "yellow")]
+
+        return(big_city_package)
+
     
+    if(transport == "NO FLIGHT"):
+
+        big_city_package = pd.concat([
+        big_city_stuff_dataframe,
+        city_no_flight_dataframe],
+        ignore_index= True, axis = 1)
+
+        big_city_package.columns = [
+        colored("Big city items", "yellow"),
+        colored("Transport items", "yellow")]
+
+        return(big_city_package)
 
 
 
