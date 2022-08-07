@@ -3,6 +3,8 @@ import requests # used for weather API
 
 import json # used for  weather API
 
+import math
+
 import pandas as pd
 
 import numpy as np
@@ -238,18 +240,116 @@ while True:
 
                     selected_dataframe = saved_package_dict[selected_key]
 
-                    edit_list = selected_dataframe.columns
+                    columns = selected_dataframe.columns
 
-                    print(edit_list)
+                    edit_list = list()
 
-                    edit_choice = int(displayMenu(edit_list)) # the number
+                    # ------------------------------ PROBABLY AN EASIER WAY TO DO THIS - OPTIMIZE IT LATER ----------------------- #
+                    for i in columns:
 
-                    # if the number is not back to main menu or add a new column:
-                    # DO IT HERE
+                        edit_list.append(str(i))
+
+                    edit_list.append("Insert a new column")
+
+                    edit_list.append("Back to main menu")
                     
-                    # if the user has picked an existing data frame
 
-                    edit_column = list(selected_dataframe.iloc[:, edit_choice-1])
+                    edit_choice = int(displayMenu(edit_list)) 
+
+                    
+                    if(edit_choice <= len(edit_list)-2): # if the user picks one of the existing columns
+
+                        print("-------------------------------", colored("What do you want to do with this column?", "green"), "---------------------")
+
+                        raw_column = list(selected_dataframe.iloc[:, edit_choice-1])
+
+                        edit_options = ["Remove an item", "Insert an item", "Go back to main menu"]
+
+                        edit_option_choice = displayMenu(edit_options)
+
+                        if(edit_option_choice == 1): # if the user wants to remove an item
+
+                            edit_column = [x for x in raw_column if type(x) == str] # we remove all the nans
+
+                            print("-------------------------------", colored("Which element do you want to remove?", "green"), "---------------------")
+
+                            edit_column.append("Back to main menu")
+
+                            remove_choice = displayMenu(edit_column) # the user chooses an option
+
+                            if(remove_choice != len(edit_column)): # if the user chooses an element to be removed.
+
+                                confirmation_edit = str(input("Are you sure that you want to remove the element? - type yes if you are sure: "))
+
+                                if(confirmation_edit.upper() == "YES"):
+
+                                        edit_column.remove(edit_column[int(remove_choice)-1]) # removing the desired element
+
+                                        edit_column.remove("Back to main menu")
+
+                                        max_rows = selected_dataframe.shape[0] # max number of rows
+
+                                        difference_row = max_rows - len(edit_column) # we calculate how many nans we have to put
+
+                                        nan_list = [float("nan")] * difference_row
+
+                                        inserting_column = edit_column + nan_list
+
+                                        edited_dataframe = saved_package_dict[selected_key]
+
+                                        edited_dataframe.iloc[:, edit_choice-1] = inserting_column
+
+                                        saved_package_dict[selected_key] = edited_dataframe
+
+
+                        if(edit_option_choice == 2): # if the user wants to insert an item
+
+                            edit_column = [x for x in raw_column if type(x) == str] # we remove all the nans
+
+                            new_item = str(input("What is the name of the item: "))
+
+                            edit_column.append(new_item)
+
+                            max_rows = selected_dataframe.shape[0] # max number of rows
+
+                            difference_row = max_rows - len(edit_column) # we calculate how many nans we have to put
+
+                            nan_list = [float("nan")] * difference_row
+
+                            inserting_column = edit_column + nan_list
+
+                            edited_dataframe = saved_package_dict[selected_key]
+
+                            edited_dataframe.iloc[:, edit_choice-1] = inserting_column
+
+                            saved_package_dict[selected_key] = edited_dataframe
+
+                            
+
+
+
+
+
+
+
+                                
+
+                            
+                        
+                            
+
+
+
+
+
+
+                        
+
+
+
+
+
+
         
 
 
