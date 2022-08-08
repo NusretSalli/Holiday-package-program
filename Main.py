@@ -263,7 +263,7 @@ while True:
 
                         raw_column = list(selected_dataframe.iloc[:, edit_choice-1])
 
-                        edit_options = ["Remove an item", "Insert an item", "Go back to main menu"]
+                        edit_options = ["Remove an item", "Insert an item", "Remove the entire column", "Go back to main menu"]
 
                         edit_option_choice = displayMenu(edit_options)
 
@@ -314,54 +314,87 @@ while True:
 
                             difference_row = max_rows - len(edit_column) # we calculate how many nans we have to put
 
-                            nan_list = [float("nan")] * difference_row
+                            if(difference_row != -1): # if the dataframe has space to put the wanted item 
 
-                            inserting_column = edit_column + nan_list
+                                nan_list = [float("nan")] * difference_row
 
-                            edited_dataframe = saved_package_dict[selected_key]
+                                inserting_column = edit_column + nan_list
 
-                            edited_dataframe.iloc[:, edit_choice-1] = inserting_column
+                                edited_dataframe = saved_package_dict[selected_key]
 
-                            saved_package_dict[selected_key] = edited_dataframe
+                                edited_dataframe.iloc[:, edit_choice-1] = inserting_column
 
+                                saved_package_dict[selected_key] = edited_dataframe
                             
+                            else: # if you want to insert something into the largest
 
+                                new_row = [float("nan")] * selected_dataframe.shape[1]
 
+                                # we insert the written item into the selected column
 
+                                new_row[edit_choice-1] = new_item
 
+                                # we insert the new row into our dataframe.
 
+                                edited_dataframe = saved_package_dict[selected_key]
 
+                                # inserted the row at the bottom
+
+                                edited_dataframe.loc[len(edited_dataframe)] = new_row
+
+                                # we substitute the old dataframe with the updated one
+
+                                saved_package_dict[selected_key] = edited_dataframe
+                            
+                        if(edit_option_choice == 3): # if the user wants to remove the entire column
+
+                            confirmation_column = str(input("Are you sure that you want to remove the column and all of its content? Type yes if you are sure: "))
+
+                            if(confirmation_column.upper() == "YES"): # if the user confirms the changes
+
+                                selected_dataframe = saved_package_dict[selected_key]
+
+                                selected_dataframe.drop(selected_dataframe.columns[edit_choice-1], axis = 1, inplace = True)
+                                
+                                saved_package_dict[selected_key] = selected_dataframe
 
                                 
-
-                            
-                        
-                            
-
-
-
-
-
-
                         
 
+                    if(edit_choice == len(edit_list)-1): # if the user picks "insert a new column"
+
+                        selected_dataframe = saved_package_dict[selected_key]
+
+                        column_name = str(input("What should the new column be called? "))
+
+                        column_elements = str(input("What should the new column include? Write it as follows: x,y,z...: "))
+
+                        column_elements_list = column_elements.split(",")
+
+                        max_rows = selected_dataframe.shape[0] # max number of rows
+
+                        difference_row = max_rows - len(column_elements_list) # we calculate how many nans we have to put
 
 
+                        # ------------- we have to do something if you want to make a new column that is the "maximum" column ---------- #
 
+                        nan_list = [float("nan")] * difference_row
 
+                        new_column = column_elements_list + nan_list
 
-        
+                        selected_dataframe[colored(column_name, "yellow")] = new_column
 
-
-
-
+                        saved_package_dict[selected_key] = selected_dataframe
+      
+                        
+                    
                 if(package_menu_choice == 3): # if the user wants to delete the package
                     
                     # we make a confirmation that the user wants to delete the chosen saved package
 
                     confirmation = str(input(colored(" Are you sure you want permenantely want to delete the package: " + selected_key + " ? \nType yes if you are sure ", "yellow")))
 
-                    if(confirmation.lower() == "yes"): # if the user really wants to delete the package
+                    if(confirmation.upper() == "YES"): # if the user really wants to delete the package
 
                         del saved_package_dict[selected_key]
 
