@@ -283,23 +283,34 @@ while True:
 
                                 if(confirmation_edit.upper() == "YES"):
 
-                                        edit_column.remove(edit_column[int(remove_choice)-1]) # removing the desired element
+                                    max_rows = selected_dataframe.shape[0] # max number of rows
 
-                                        edit_column.remove("Back to main menu")
+                                    edit_column.remove(edit_column[int(remove_choice)-1]) # removing the desired element
 
-                                        max_rows = selected_dataframe.shape[0] # max number of rows
+                                    edit_column.remove("Back to main menu")
 
-                                        difference_row = max_rows - len(edit_column) # we calculate how many nans we have to put
+                                    difference_row = max_rows - len(edit_column) # we calculate how many nans we have to put
 
-                                        nan_list = [float("nan")] * difference_row
+                                    nan_list = [float("nan")] * difference_row
 
-                                        inserting_column = edit_column + nan_list
+                                    inserting_column = edit_column + nan_list
 
-                                        edited_dataframe = saved_package_dict[selected_key]
+                                    edited_dataframe = saved_package_dict[selected_key]
 
-                                        edited_dataframe.iloc[:, edit_choice-1] = inserting_column
+                                    edited_dataframe.iloc[:, edit_choice-1] = inserting_column
+
+                                    if(edited_dataframe.iloc[-1].isna().sum().sum() == edited_dataframe.shape[1]):
+
+                                        edited_dataframe.drop(index = edited_dataframe.index[-1], axis = 0, inplace = True)
 
                                         saved_package_dict[selected_key] = edited_dataframe
+                                    
+                                    else:
+
+                                        saved_package_dict[selected_key] = edited_dataframe
+
+
+
 
 
                         if(edit_option_choice == 2): # if the user wants to insert an item
@@ -375,16 +386,39 @@ while True:
 
                         difference_row = max_rows - len(column_elements_list) # we calculate how many nans we have to put
 
+                        if(len(column_elements_list) > max_rows): # if the number of elements you want to put is larger than the current number of rows
+                            
+                            number_new_rows = len(column_elements_list) - max_rows
+
+                            selected_dataframe[colored(column_name, "yellow")] = column_elements_list[0:max_rows] # we insert the maximum allowed elements
+
+                            for i in range(0,number_new_rows): # we loop over the remaining elements that can't fit the dataframe
+                                
+                                # make a list full of nan corresponding to our number of columns
+
+                                nan_list = [float("nan")] * selected_dataframe.shape[1]
+
+                                # we substitute the last element in nan_list with the current item we need to put
+
+                                nan_list[-1] = column_elements_list[max_rows + i]
+
+                                # we insert the row into our dataframe.
+
+                                selected_dataframe.loc[len(selected_dataframe)] = nan_list
+
+                            saved_package_dict[selected_key] = selected_dataframe
+
 
                         # ------------- we have to do something if you want to make a new column that is the "maximum" column ---------- #
+                        else:
 
-                        nan_list = [float("nan")] * difference_row
+                            nan_list = [float("nan")] * difference_row
 
-                        new_column = column_elements_list + nan_list
+                            new_column = column_elements_list + nan_list
 
-                        selected_dataframe[colored(column_name, "yellow")] = new_column
+                            selected_dataframe[colored(column_name, "yellow")] = new_column
 
-                        saved_package_dict[selected_key] = selected_dataframe
+                            saved_package_dict[selected_key] = selected_dataframe
       
                         
                     
