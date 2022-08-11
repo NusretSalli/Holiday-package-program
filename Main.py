@@ -334,6 +334,8 @@ while True:
                                 
                                 saved_package_dict[selected_key] = selected_dataframe
 
+                                # IF THE ROWS CONTAIN ONLY NANS - remove them  #
+
                                 
                     if(edit_choice == len(edit_list)-1): # if the user picks "insert a new column"
 
