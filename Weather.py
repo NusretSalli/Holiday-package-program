@@ -73,24 +73,9 @@ def Weather(location):
     
     ###---------------------------------------------- HISTORICAL DATA ----------------------------------------------------###
 
-    # we make a for loop that loops through each UNIX-timestamp and look for the temperatures the past 10 years (if that was possible).
-
+    # we make a for loop that loops through each UNIX-timestamp and look for the temperatures the past year (if that is possible).
     #unix_days = 86400
-
     #dataframe_historical = pd.DataFrame()
-
-
-    #for i in range(0,8):
-
-        #for j in range(1,10):
-
-            #history_url = "http://api.openweathermap.org/data/2.5/onecall/timemachine?lat=%s&lon=%s&dt=%s&appid=%s&units=metric" % (lat, lon, time_list[i]-j*unix_days, api_key)
-
-            #history_response = requests.get(history_url)
-
-            #history_data = json.loads(history_response.text)
-
-            #dataframe_historical = dataframe_historical.append(history_data["current"], ignore_index=True)
 
 
     ###--------------------------------------------- OUTPUT-CONSTRUCTION -------------------------------------------------###
