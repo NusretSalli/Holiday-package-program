@@ -17,6 +17,8 @@ import tkinter
 
 import tkintermapview
 
+import customtkinter
+
 
 ## MAYBE SOMETHING THAT WE WILL BE WORKING ON?
 
@@ -38,16 +40,15 @@ def weather_map():
 
 # create tkinter window
 root_tk = tkinter.Tk()
-
-root_tk.geometry(f"{800}x{600}")
-
-root_tk.title("weather_map.py")
+root_tk.geometry(f"{1000}x{800}")
+root_tk.title("map_view_example.py")
 
 # create map widget
-map_widget = tkintermapview.TkinterMapView(root_tk, width=800, height=600, corner_radius=0)
-
+map_widget = tkintermapview.TkinterMapView(root_tk, width=1000, height=800, corner_radius=0)
 map_widget.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
 
-map_widget.pack()
+# set current widget position and zoom
+map_widget.set_position(55.7687725, 10.2956985)  # Denmark
+map_widget.set_zoom(7)
 
 root_tk.mainloop()
