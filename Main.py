@@ -87,11 +87,11 @@ while True:
 
             if(holiday_location_choice == 1): # if the holiday is abroad
 
-                # asking for the location the holiday will take place
+                # Asking for the location the holiday will take place
 
                 location = str(input("Please type in the city and country as this: city, countrycode: ")) # we ask for the location
 
-                weather_reports = Weather(location) # using the weather API to get the relevant data
+                weather_reports = Weather(location, "NO") # using the weather API to get the relevant data
 
                 abroad_package = PackageCreation.essentialCreation("ABROAD") # we store the pre-made package for ABROAD holidays.
 
@@ -132,7 +132,7 @@ while True:
 
                 location = str(input("Please type in the city and country as this: city, countrycode: ")) # Asking for the location the holiday will take place
 
-                weather_reports = Weather(location) # using the weather API to get the relevant data
+                weather_reports = Weather(location, "NO") # using the weather API to get the relevant data
 
                 not_abroad_package = PackageCreation.essentialCreation("NOT ABROAD") # storing the pre-made package for NOT ABROAD
 

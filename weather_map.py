@@ -73,10 +73,9 @@ def map_creator():
             add_marker(coordinates_tuple)
 
 
-    map.add_left_click_map_command(left_click_event) # we implement the command
+    map.add_left_click_map_command(left_click_event) # We implement the command
 
 
     root_tk.mainloop() # We "terminate" the Tkinter-window
 
-    return(coordinates)
-
+    return(coordinates) # We return the latitude and longitude from our list, respectively
