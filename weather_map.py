@@ -113,8 +113,6 @@ def map_creator():
     return(coordinates) # We return the latitude and longitude from our list, respectively
 
 
-#print(map_creator())
-
 #while True:
 
     #print("------------------------------", colored("Please choose one of the options", "green"), "---------------------------------------------------")
@@ -122,5 +120,9 @@ def map_creator():
     #main_menu = ["New holiday", "Saved holiday packages", "Quit"] # we give the user the overall options
 
     #choice = displayMenu(main_menu)
+
+    #if(choice == 3):
+
+        #print("hello")
 
     
