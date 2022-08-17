@@ -115,8 +115,6 @@ def map_creator():
 
 #print(map_creator())
 
-#counter = 0
-
 #while True:
 
     #print("------------------------------", colored("Please choose one of the options", "green"), "---------------------------------------------------")
