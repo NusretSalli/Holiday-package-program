@@ -48,6 +48,8 @@ import tkinter
 
 import tkintermapview
 
+from tkinter import messagebox
+
 
 
 def map_creator():
@@ -111,6 +113,7 @@ def map_creator():
     root_tk.mainloop() # We "terminate" the Tkinter-window
 
     return(coordinates) # We return the latitude and longitude from our list, respectively
+
 
 
 #while True:

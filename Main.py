@@ -148,7 +148,11 @@ while True:
                 
                 if(package_given_choice == 3): # if the user wants to save the package in a CSV-file
 
-                    placeholder = 2
+                    csv_name = str(input("What should the csv-file be called?: "))
+
+                    abroad_package.to_csv(csv_name)
+
+                    print("The package has been saved")
 
 
             if(holiday_location_choice == 2): # if the holiday is not abroad
@@ -188,8 +192,12 @@ while True:
 
                 
                 if(package_given_choice == 3): # if the user wants to save the package in a CSV-file
+                    
+                    csv_name = str(input("What should the csv-file be called?: "))
 
-                    placeholder = 2
+                    not_abroad_package.to_csv(csv_name)
+
+                    print("The package has been saved")
                 
 
 
