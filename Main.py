@@ -25,6 +25,11 @@ import pickle # to store the saved packages
 
 import PackageCreation # the package-organizer function
 
+import tkinter
+
+import tkintermapview
+
+
 ### ----------------------------------------------------- SAVED PACKGAGES --------------------------------------------------###
 
 # we create our saved / stored package
@@ -55,11 +60,12 @@ else: # if the stored package is not empty
 
 ###------------------------------------------------------- MENU ------------------------------------------------------------###
 
+
 while True:
 
     print("------------------------------", colored("Please choose one of the options", "green"), "---------------------------------------------------")
 
-    main_menu = np.array(["New holiday", "Saved holiday packages", "Quit"]) # we give the user the overall options
+    main_menu = ["New holiday", "Saved holiday packages", "Quit"] # we give the user the overall options
 
     choice = displayMenu(main_menu)
 
@@ -67,7 +73,7 @@ while True:
 
         print("---------------------------", colored("What type of holiday is it?", "green"),"--------------------------------------------------")
 
-        holiday_menu = np.array(["Basic holiday", "Skiing holiday", "Camping holiday", "Custom Holiday", "Back to main menu"]) # Options when it comes to holidays 
+        holiday_menu = (["Basic holiday", "Skiing holiday", "Camping holiday", "Custom Holiday", "Back to main menu"]) # Options when it comes to holidays 
 
         holiday_choice = displayMenu(holiday_menu)
 
@@ -81,25 +87,42 @@ while True:
 
             print("-------------------------------", colored("Where is the holiday located?", "green"),"--------------------------------------")
 
-            holiday_location_menu = np.array(["Abroad,", "Not abroad", "Both"]) # User chooses where the holiday takes place
+            holiday_location_menu = (["Abroad,", "Not abroad", "Both"]) # User chooses where the holiday takes place
 
             holiday_location_choice = displayMenu(holiday_location_menu)
 
             if(holiday_location_choice == 1): # if the holiday is abroad
 
-                # Asking for the location the holiday will take place
+                location_option = ["Give out the location with a map", "Give out location by typing it", "Back to main menu"]
 
-                location = str(input("Please type in the city and country as this: city, countrycode: ")) # we ask for the location
+                print("-------------------------------", colored("How would you like to give out the location?", "green"),"--------------------------------------")
 
-                weather_reports = Weather(location, "NO") # using the weather API to get the relevant data
+                location_choice = displayMenu(location_option)
 
-                abroad_package = PackageCreation.essentialCreation("ABROAD") # we store the pre-made package for ABROAD holidays.
+                if(location_choice == 1):
 
-                print(abroad_package.to_markdown())
+                    weather_reports = Weather("NO INPUT", "MAP") # using the weather API to get the relevant data with the map
+
+                    abroad_package = PackageCreation.essentialCreation("ABROAD") # we store the pre-made package for ABROAD holidays.
+
+                    print(abroad_package.to_markdown())
+                
+                if(location_choice == 2):
+
+                    # Asking for the location the holiday will take place
+
+                    location = str(input("Please type in the city and country as this: city, countrycode: ")) # we ask for the location
+
+                    weather_reports = Weather(location, "NO MAP") # using the weather API to get the relevant data
+
+                    abroad_package = PackageCreation.essentialCreation("ABROAD") # we store the pre-made package for ABROAD holidays.
+
+                    print(abroad_package.to_markdown())
+
 
                 print("-------------------------------", colored("What do you want to do with the given package?", "green"), "---------------------")
 
-                package_given_menu = np.array(["Save the package", "Edit the package", "Save it in a CSV-file", "Nothing, go back to main menu"]) # We ask what the user wants to do with the given package
+                package_given_menu = (["Save the package", "Edit the package", "Save it in a CSV-file", "Nothing, go back to main menu"]) # We ask what the user wants to do with the given package
 
                 package_given_choice = displayMenu(package_given_menu)
 
@@ -142,7 +165,7 @@ while True:
 
                 print("-------------------------------", colored("What do you want to do with the given package?", "green"), "---------------------")
 
-                package_given_menu = np.array(["Save the package", "Edit the package", "Save it in a CSV-file", "Nothing, go back to main menu"])
+                package_given_menu = ["Save the package", "Edit the package", "Save it in a CSV-file", "Nothing, go back to main menu"]
 
                 package_given_choice = displayMenu(package_given_menu)
 

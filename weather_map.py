@@ -15,6 +15,41 @@ import tkinter
 
 import tkintermapview
 
+
+import requests # used for weather API
+
+import json # used for  weather API
+
+import math
+
+import pandas as pd
+
+import numpy as np
+
+import tabulate # to customize the pandas dataframe even more and look cleaner
+
+import time as timer
+
+from displayMenu import displayMenu # menu-creator function
+
+#from Weather import Weather # the Weather API function
+
+#from weather_map import map_creator
+
+from inputverifier import inputNumber # function that makes sure type in a valid option
+
+from termcolor import colored # to give colorful messages to the terminal
+
+import pickle # to store the saved packages 
+
+import PackageCreation # the package-organizer function
+
+import tkinter
+
+import tkintermapview
+
+
+
 def map_creator():
 
     coordinates = []
@@ -25,13 +60,13 @@ def map_creator():
 
     root_tk.geometry(f"{1200}x{1200}") # Size of the Tkinter-window
 
-    root_tk.title("map_view_example.py") # Name of the Tkinter-window
+    root_tk.title("mapper") # Name of the Tkinter-window
 
     # creating the map on our window
 
     map = tkintermapview.TkinterMapView(root_tk, width=1200, height=1200, corner_radius=0) # size of the map
 
-    map.pack(fill="both", expand=True)
+    #map.pack(fill="both", expand=True)
 
     map.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER) # the placement of the map
 
@@ -59,7 +94,6 @@ def map_creator():
 
             coordinates[1] = coords[1]
 
-
     def left_click_event(coordinates_tuple):
 
         # Function that will call the add_marker function whenever the person makes a left-click
@@ -72,10 +106,23 @@ def map_creator():
 
             add_marker(coordinates_tuple)
 
-
     map.add_left_click_map_command(left_click_event) # We implement the command
-
 
     root_tk.mainloop() # We "terminate" the Tkinter-window
 
     return(coordinates) # We return the latitude and longitude from our list, respectively
+
+
+#print(map_creator())
+
+#counter = 0
+
+#while True:
+
+    #print("------------------------------", colored("Please choose one of the options", "green"), "---------------------------------------------------")
+
+    #main_menu = ["New holiday", "Saved holiday packages", "Quit"] # we give the user the overall options
+
+    #choice = displayMenu(main_menu)
+
+    

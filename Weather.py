@@ -12,9 +12,6 @@ import time as timer
 
 import weather_map # our weather_map function
 
-
-### MAYBE WE CAN USE PYOWM TO MAKE IT VERY NICE? ###
-
 def Weather(location, map):
 
     ##------------------------------------------- DESCRIPTION OF THE FUNCTION -----------------------------------------------## 
@@ -32,7 +29,7 @@ def Weather(location, map):
 
     api_key = "4f5ae53c38b5b3cb828838011e3bf60c"
 
-    if(map == "MAP"):
+    if(map == "MAP" and location == "NO INPUT"):
 
         coordinates = weather_map.map_creator() # [lat, lon] values
 
@@ -103,8 +100,6 @@ def Weather(location, map):
             humidity_list.append(humidity)
 
             dataframe_weather = dataframe_weather.append(weather, ignore_index = True)
-
-        return(dataframe_temp)
 
     else:
 
@@ -193,7 +188,9 @@ def Weather(location, map):
 
             dataframe_weather = dataframe_weather.append(weather, ignore_index = True)
 
-        return(dataframe_temp)
+    return(dataframe_temp)
+
+
 
 
 ### STUFF TO DO ###
@@ -201,6 +198,4 @@ def Weather(location, map):
 # Get day data and maybe maximum for temp and feels_like
 
 # get weather data more precisely - odds of rain, snow and the amount of rain and snow.
-
-
 
