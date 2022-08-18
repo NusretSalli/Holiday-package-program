@@ -1,7 +1,5 @@
 from inputverifier import * 
 
-import numpy as np
-
 from termcolor import colored
 
 def displayMenu(options):
@@ -28,7 +26,7 @@ def displayMenu(options):
 
     while choice not in option_list:
         
-        choice = inputNumber(colored("Please choose a menu item: ", "yellow"))
+        choice = inputNumber(colored("Please choose a menu item: ", "yellow")) # THIS CODE WON'T WORK WITH THE MAP CREATOR 
 
         print("\n")
         

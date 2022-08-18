@@ -50,6 +50,8 @@ import tkintermapview
 
 from tkinter import messagebox
 
+from inputverifier import inputNumber
+
 
 
 def map_creator():
@@ -116,16 +118,17 @@ def map_creator():
 
 
 
+
 #while True:
 
-    #print("------------------------------", colored("Please choose one of the options", "green"), "---------------------------------------------------")
+#print("------------------------------", colored("Please choose one of the options", "green"), "---------------------------------------------------")
 
-    #main_menu = ["New holiday", "Saved holiday packages", "Quit"] # we give the user the overall options
+#main_menu = ["New holiday", "Saved holiday packages", "Quit"] # we give the user the overall options
 
-    #choice = displayMenu(main_menu)
+#print(displayMenu(main_menu))
 
-    #if(choice == 3):
+#if("Quit" in main_menu):
 
-        #print("hello")
+    #print("still works")
 
     
