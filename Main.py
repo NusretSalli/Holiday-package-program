@@ -25,9 +25,7 @@ import pickle # to store the saved packages
 
 import PackageCreation # the package-organizer function
 
-import tkinter
-
-import tkintermapview
+from edit_package import edit_package
 
 
 ### ----------------------------------------------------- SAVED PACKGAGES --------------------------------------------------###
@@ -143,7 +141,31 @@ while True:
 
                 if(package_given_choice == 2): # if the user wants to edit the package
 
-                    placeholder = 2
+                    edited_package = edit_package(abroad_package)
+
+                    print(edited_package.to_markdown())
+
+                    print("-------------------------------", colored("What do you want to do with the edited package?", "green"), "---------------------")
+
+                    edited_options = ["Save the package", "Save it in a CSV-file", "Nothing, Go back to main menu"]
+
+                    edited_options_choice = displayMenu(edited_options)
+
+                    if(edited_options_choice == 1): # if the user wants to save the package
+
+                        # save_function
+
+                        placeholder = 2
+
+                    if(edited_options_choice == 2): # if the user wants to save the package in a CSV-file
+
+                        placeholder = 2
+
+                    
+                    if(edited_options_choice == 3): # if the user wants to go back to main menu.
+
+                        pass
+
 
                 
                 if(package_given_choice == 3): # if the user wants to save the package in a CSV-file
@@ -188,7 +210,7 @@ while True:
 
                 if(package_given_choice == 2): # if the user wants to edit the package
 
-                    placeholder = 2
+                    edit_package(not_abroad_package)
 
                 
                 if(package_given_choice == 3): # if the user wants to save the package in a CSV-file
