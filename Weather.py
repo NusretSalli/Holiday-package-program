@@ -8,7 +8,7 @@ import pandas as pd
 
 import numpy as np
 
-import time as timer
+import datetime
 
 import weather_map # our weather_map function
 
@@ -55,7 +55,9 @@ def Weather(location, map):
 
             time = daily[i]["dt"]
 
-            time_list.append(time)
+            converted_time = datetime.datetime.fromtimestamp(time)
+
+            time_list.append(converted_time.strftime("%Y-%m-%d"))
 
         
         ###---------------------------------------------- HISTORICAL DATA ----------------------------------------------------###
@@ -121,76 +123,115 @@ def Weather(location, map):
 
         URL = "https://api.openweathermap.org/data/2.5/onecall?lat=%s&lon=%s&appid=%s&units=metric" % (lat, lon, api_key)
 
+        URL2 = "https://pro.openweathermap.org/data/2.5/forecast/climate?lat=%s&lon=%s&appid=%s&units=metric" % (lat, lon, api_key)
+
         # we use the request-package to get the call.
 
-        response = requests.get(URL)
+        response = requests.get(URL2)
 
         # we load the JSON data from the call.
 
         data = json.loads(response.text)
 
-        # we now take look at the forecast, which is the next 8 days.
+        # we now take look at the forecast, which is the next 30 days.
 
-        daily = data["daily"]
-
-        # we'll make a for loop that will extract the UNIX-time which we need for our historical weather data
-
-        time_list = []
-
-        for i in range(0,8):
-
-            time = daily[i]["dt"]
-
-            time_list.append(time)
+        daily = data["list"]
 
         
-        ###---------------------------------------------- HISTORICAL DATA ----------------------------------------------------###
+        ## --------------------------------------------- Creating our date -----------------------------------------------##
 
-        # we make a for loop that loops through each UNIX-timestamp and look for the temperatures the past year (if that is possible).
-        #unix_days = 86400
-        #dataframe_historical = pd.DataFrame()
+        time_list = [] # list that will contain our date
 
+        for i in range(0,30): # loop through each UNIX-timestamp
 
-        ###--------------------------------------------- OUTPUT-CONSTRUCTION -------------------------------------------------###
+            time = daily[i]["dt"] # extracting the time
 
-        # we construct our dataframes for each important "element" we want to consider #
+            converted_time = datetime.datetime.fromtimestamp(time) # convert it to date
 
-        dataframe_temp = pd.DataFrame()
+            time_list.append(converted_time.strftime("%d/%m/%Y")) # Only appending the day/month/year
 
-        dataframe_feels_like = pd.DataFrame()
-
+        
+        ## ------------------------------ List of all the values we want to extract ------------------------------------------- ##
+        
         humidity_list = []
 
-        dataframe_weather = pd.DataFrame()
+        day_list = []
+
+        min_list = []
+
+        max_list = []
+
+        eve_list = []
+
+        day_feels_like_list = []
+
+        min_feels_like_list = []
+
+        max_feels_like_list = []
+
+        eve_feels_like_list = []
+
+        weather_list = []
 
 
-        # for loop that iterates through each forecasted days (8 days)
+        # for loop that iterates through each forecasted days (30 days)
 
-        for i in range(0,8):
+        for i in range(0,30):
 
             # extract each factor for a given forecasted day
 
             temp = daily[i]["temp"] # a dictionary with a total of 6 elements
 
-            humidity = daily[i]["humidity"] # integer
+            day_list.append(temp["day"]) # appending the day-temperature to our list
+
+            min_list.append(temp["min"]) # appending the min-temperature to our list
+
+            max_list.append(temp["max"]) # appending the max-temperature to our list
+
+            eve_list.append(temp["eve"]) # appending the evening-temperature to our list
+
 
             feels_like = daily[i]["feels_like"] # a dictionary with a total of 4 elements
 
-            weather = daily[i]["weather"] # a dictionary with a total of 4 elements. 
+            feels_like_list = list(feels_like.values()) # make a list of all the values in the dictionary used for max and min
 
-            # we append these values to their respective dataframe by row
+            day_feels_like_list.append(feels_like["day"]) # appending the day-temperature to our list
 
-            dataframe_temp = dataframe_temp.append(temp, ignore_index = True)
+            min_feels_like_list.append(min(feels_like_list)) # finding the min value from our feels_like_list
 
-            dataframe_feels_like = dataframe_feels_like.append(feels_like, ignore_index = True)
+            max_feels_like_list.append(max(feels_like_list)) # finding the max value from our feels_like_list
 
-            humidity_list.append(humidity)
-
-            dataframe_weather = dataframe_weather.append(weather, ignore_index = True)
-
-    return(dataframe_temp)
+            eve_feels_like_list.append(feels_like["eve"]) # appending the evening-temperature to our list
 
 
+            humidity = daily[i]["humidity"] # integer
+
+            humidity_list.append(humidity) # Appending the humidity-value into the list
+
+
+            weather = daily[i]["weather"] # a dictionary with a total of 4 elements.
+
+            weather_list.append(weather[0]["description"]) # we get the weather condition from our weather variable
+
+    
+    # constructing our entire dictionary that will be turned into a dataframe
+
+    whole_data = {
+        "day": day_list,
+        "min": min_list,
+        "max": max_list,
+        "evening": eve_list,
+        "humidity (%)": humidity_list, 
+        "Weather condition": weather_list,
+        "Date": time_list}
+
+    data_dataframe = pd.DataFrame(whole_data) # Constructing our dataframe
+
+    data_dataframe = data_dataframe.set_index("Date") # our index becomes our date
+
+    return(data_dataframe.to_markdown())
+
+#print(Weather("London, GB", "NO MAP"))
 
 
 ### STUFF TO DO ###

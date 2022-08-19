@@ -60,7 +60,6 @@ else: # if the stored package is not empty
 
 ###------------------------------------------------------- MENU ------------------------------------------------------------###
 
-
 while True:
 
     print("------------------------------", colored("Please choose one of the options", "green"), "---------------------------------------------------")
@@ -151,7 +150,11 @@ while True:
 
                     if(edited_options_choice == 2): # if the user wants to save the package in a CSV-file
 
-                        placeholder = 2
+                        csv_name = str(input("What should the csv-file be called?: "))
+
+                        edited_package.to_csv(csv_name)
+
+                        print("The package has been saved")
 
                     
                     if(edited_options_choice == 3): # if the user wants to go back to main menu.
