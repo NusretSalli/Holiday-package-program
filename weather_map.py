@@ -1,10 +1,4 @@
 
-import os, sys
-
-import requests
-
-import json
-
 import pandas as pd
 
 import numpy as np
@@ -15,20 +9,11 @@ import tkinter
 
 import tkintermapview
 
-
 import requests # used for weather API
 
 import json # used for  weather API
 
-import math
-
-import pandas as pd
-
-import numpy as np
-
 import tabulate # to customize the pandas dataframe even more and look cleaner
-
-import time as timer
 
 from displayMenu import displayMenu # menu-creator function
 
@@ -43,14 +28,6 @@ from termcolor import colored # to give colorful messages to the terminal
 import pickle # to store the saved packages 
 
 import PackageCreation # the package-organizer function
-
-import tkinter
-
-import tkintermapview
-
-from tkinter import messagebox
-
-from inputverifier import inputNumber
 
 
 
@@ -117,6 +94,24 @@ def map_creator():
     return(coordinates) # We return the latitude and longitude from our list, respectively
 
 
+
+#options = ["hello", "what", "I"]
+
+#for i in range(len(options)):
+    
+    #print(colored("{:d}. {:s}".format(i+1, options[i]),"magenta"))
+    
+#choice = 0
+
+#option_list = list(range(1,len(options)+1))
+
+#while choice not in option_list:
+    
+    #choice = int(input(colored("Please choose a menu item: ", "yellow"))) # this part doesn't work with the map_creator()
+
+    #print("\n")
+    
+#print(choice)
 
 
 #while True:

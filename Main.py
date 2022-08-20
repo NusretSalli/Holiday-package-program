@@ -92,7 +92,7 @@ while True:
 
             if(holiday_location_choice == 1): # if the holiday is abroad
 
-                location_option = ["Give out the location with a map", "Give out location by typing it", "Back to main menu"]
+                location_option = ["Give out the location with a map", "Give out the location by typing it", "Back to main menu"]
 
                 print("-------------------------------", colored("How would you like to give out the location?", "green"),"--------------------------------------")
 

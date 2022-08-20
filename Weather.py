@@ -12,6 +12,12 @@ import datetime
 
 import weather_map # our weather_map function
 
+from displayMenu import displayMenu
+
+from termcolor import colored # to give colorful messages to the terminal
+
+import openpyxl
+
 def Weather(location, map):
 
     ##------------------------------------------- DESCRIPTION OF THE FUNCTION -----------------------------------------------## 
@@ -217,11 +223,20 @@ def Weather(location, map):
     # constructing our entire dictionary that will be turned into a dataframe
 
     whole_data = {
-        "day": day_list,
-        "min": min_list,
-        "max": max_list,
-        "evening": eve_list,
-        "humidity (%)": humidity_list, 
+        "Day": day_list,
+        "Min": min_list,
+        "Max": max_list,
+        "Evening": eve_list,
+        "Humidity (%)": humidity_list, 
+        "Weather condition": weather_list,
+        "Date": time_list}
+
+    feels_like_data = {
+        "Day": day_feels_like_list,
+        "Min": min_feels_like_list,
+        "Max": max_feels_like_list,
+        "Evening": eve_feels_like_list,
+        "Humidity (%)": humidity_list,
         "Weather condition": weather_list,
         "Date": time_list}
 
@@ -229,9 +244,70 @@ def Weather(location, map):
 
     data_dataframe = data_dataframe.set_index("Date") # our index becomes our date
 
-    return(data_dataframe.to_markdown())
+    statistical_dataframe = data_dataframe.describe() # we make a statistical dataframe from our data_dataframe
 
-#print(Weather("London, GB", "NO MAP"))
+    cleaned_statistical_dataframe = statistical_dataframe.iloc[1: , :] # excluding the first row.
+
+
+    feels_like_dataframe = pd.DataFrame(feels_like_data) # Constructing our feels_like
+
+    feels_like_statistical = feels_like_dataframe.describe()
+
+    cleaned_feels_like_statistical = feels_like_statistical.iloc[1: , :] 
+
+
+    ### -------------------------------------------------------- MENU-Section -------------------------------------------------------###
+    
+    weather_options = ["Get weather reports", "Get weather maps", "Nothing"] # 
+
+
+    
+
+    
+    while True:
+            
+        print(data_dataframe.to_markdown())
+
+        print("------------------------------", colored("What do you want to do with the weather report?", "green"), "---------------------------------------------------") 
+
+        weather_report_options = ["Give a statistical summary", "Save the weather report in a an Excel-file", "Nothing"]
+
+        weather_report_choice = displayMenu(weather_report_options)
+
+        if(weather_report_choice == 1): # if the user wants to have a statistical summary
+
+            print(cleaned_statistical_dataframe.to_markdown())
+
+            # Asking if the user wants to save the statistical dataframe as an excel-file
+
+            excel_question = str(input(colored("Do you want to save the statistical report in an Excel-file? Type yes if you want to : ", "yellow")))
+
+            if(excel_question.upper() == "YES"): # if the user wants to save it
+
+                excel_name = str(input(colored("What should the Excel-file be called? (remember the .xlsx extension): ", "yellow"))) # name of the file
+
+                cleaned_statistical_dataframe.to_excel(excel_name) # we save the dataframe
+            
+
+        if(weather_report_choice == 2): # if the user wants to save the weather reports
+
+            excel_name = str(input(colored("What should the Excel-file be called? (remember the .xlsx extension): ", "yellow"))) # name of the file
+
+            data_dataframe.to_excel(excel_name) # we save the dataframe
+
+
+        if(weather_report_choice == 3): # if the usrer wants to leave the site
+
+            break
+        
+
+
+
+
+    return(cleaned_statistical_dataframe)
+    
+
+print(Weather("London, GB", "NO MAP"))
 
 
 ### STUFF TO DO ###
