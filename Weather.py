@@ -258,12 +258,6 @@ def Weather(location, map):
 
     ### -------------------------------------------------------- MENU-Section -------------------------------------------------------###
     
-    weather_options = ["Get weather reports", "Get weather maps", "Nothing"] # 
-
-
-    
-
-    
     while True:
             
         print(data_dataframe.to_markdown())
@@ -299,12 +293,24 @@ def Weather(location, map):
         if(weather_report_choice == 3): # if the usrer wants to leave the site
 
             break
-        
+    
+    print("\n")
+    
+    min_average = round(cleaned_statistical_dataframe.iloc[0,1],2)
+
+    min_feels_like = round(cleaned_feels_like_statistical.iloc[0,1],2)
+
+    max_average = round(cleaned_statistical_dataframe.iloc[0,2],)
+
+    max_feels_like = round(cleaned_feels_like_statistical.iloc[0,2],2)
+
+    print(colored("The temperature will on average range anywhere from ","yellow") + colored(f"{min_average} to {max_average}","green") +  colored(" celsius","yellow"))
+    print("\n")
+    print(colored("The temperature however, will feel like ","yellow") + colored(f"{min_feels_like} to {max_feels_like}","green") + colored(" celsius", "yellow"))
+    print()
 
 
-
-
-    return(cleaned_statistical_dataframe)
+    return(cleaned_statistical_dataframe.iloc[0, 0:4])
     
 
 print(Weather("London, GB", "NO MAP"))
