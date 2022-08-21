@@ -179,6 +179,7 @@ def Weather(location, map):
 
         weather_list = []
 
+        weather_type_list = []
 
         # for loop that iterates through each forecasted days (30 days)
 
@@ -215,9 +216,11 @@ def Weather(location, map):
             humidity_list.append(humidity) # Appending the humidity-value into the list
 
 
-            weather = daily[i]["weather"] # a dictionary with a total of 4 elements.
+            weather_overall = daily[i]["weather"] # a dictionary with a total of 4 elements.
 
-            weather_list.append(weather[0]["description"]) # we get the weather condition from our weather variable
+            weather_list.append(weather_overall[0]["description"]) # we get the weather condition from our weather variable
+
+            weather_type_list.append(weather_overall[0]["main"])
 
     
     # constructing our entire dictionary that will be turned into a dataframe
@@ -283,7 +286,7 @@ def Weather(location, map):
                 cleaned_statistical_dataframe.to_excel(excel_name) # we save the dataframe
             
 
-        if(weather_report_choice == 2): # if the user wants to save the weather reports
+        if(weather_report_choice == 2): # If the user wants to save the weather reports
 
             excel_name = str(input(colored("What should the Excel-file be called? (remember the .xlsx extension): ", "yellow"))) # name of the file
 
@@ -304,16 +307,20 @@ def Weather(location, map):
 
     max_feels_like = round(cleaned_feels_like_statistical.iloc[0,2],2)
 
-    print(colored("The temperature will on average range anywhere from ","yellow") + colored(f"{min_average} to {max_average}","green") +  colored(" celsius","yellow"))
-    print("\n")
-    print(colored("The temperature however, will feel like ","yellow") + colored(f"{min_feels_like} to {max_feels_like}","green") + colored(" celsius", "yellow"))
-    print()
+    # we print the temperature 
+    print(colored("* The temperature will on average range anywhere from ","yellow") + colored(f"{min_average} to {max_average}","green") +  colored(f" celsius with {max(weather_type_list).lower()}","yellow"))
+    
+    # we print how it feels like
+    print(colored("* The temperature however, will feel like ","yellow") + colored(f"{min_feels_like} to {max_feels_like}","green") + colored(" celsius", "yellow"))
+    
+    # we print that taking the correct clothes is necessary
+    print(colored("* Therefore take suitable clothes for these weathers","yellow"))
 
 
-    return(cleaned_statistical_dataframe.iloc[0, 0:4])
+    return
     
 
-print(Weather("London, GB", "NO MAP"))
+#print(Weather("London, GB", "NO MAP"))
 
 
 ### STUFF TO DO ###

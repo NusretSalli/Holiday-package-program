@@ -78,7 +78,7 @@ while True:
 
         if(holiday_choice == 1): # if the holiday is basic 
 
-             # Ask for how long the holiday will last
+            # Ask for how long the holiday will last
 
             number_of_days = int(input(colored(" How long is your holiday in days? ", "yellow"))) # we ask the number of days the holiday last
 
@@ -98,21 +98,25 @@ while True:
 
                 location_choice = displayMenu(location_option)
 
-                if(location_choice == 1):
+                if(location_choice == 1): # if the user wants to give the location with a map
 
                     weather_reports = Weather("NO INPUT", "MAP") # using the weather API to get the relevant data with the map
 
                     abroad_package = PackageCreation.essentialCreation("ABROAD") # we store the pre-made package for ABROAD holidays.
 
+                    print("\n")
+
                     print(abroad_package.to_markdown())
                 
-                if(location_choice == 2):
+                if(location_choice == 2): # if the user wants to give the location by typing it
 
                     # Asking for the location the holiday will take place
 
                     location = str(input("Please type in the city and country as this: city, countrycode: ")) # we ask for the location
 
                     weather_reports = Weather(location, "NO MAP") # using the weather API to get the relevant data
+                    
+                    print("\n")
 
                     abroad_package = PackageCreation.essentialCreation("ABROAD") # we store the pre-made package for ABROAD holidays.
 
@@ -121,7 +125,7 @@ while True:
 
                 print("-------------------------------", colored("What do you want to do with the given package?", "green"), "---------------------")
 
-                package_given_menu = (["Save the package", "Edit the package", "Save it in a CSV-file", "Nothing, go back to main menu"]) # We ask what the user wants to do with the given package
+                package_given_menu = (["Save the package", "Edit the package", "Save it in a Excel-file", "Nothing, go back to main menu"]) # We ask what the user wants to do with the given package
 
                 package_given_choice = displayMenu(package_given_menu)
 
@@ -138,7 +142,7 @@ while True:
 
                     print("-------------------------------", colored("What do you want to do with the edited package?", "green"), "---------------------")
 
-                    edited_options = ["Save the package", "Save it in a CSV-file", "Nothing, Go back to main menu"]
+                    edited_options = ["Save the package", "Save it in a Excel-file", "Nothing, Go back to main menu"]
 
                     edited_options_choice = displayMenu(edited_options)
 
@@ -148,11 +152,11 @@ while True:
 
 
 
-                    if(edited_options_choice == 2): # if the user wants to save the package in a CSV-file
+                    if(edited_options_choice == 2): # if the user wants to save the package in a Excel-file
 
-                        csv_name = str(input("What should the csv-file be called?: "))
+                        excel_name = str(input(colored("What should the Excel-file be called? (remember the .xlsx extension): ", "yellow"))) # name of the file
 
-                        edited_package.to_csv(csv_name)
+                        edited_package.to_excel(excel_name)
 
                         print("The package has been saved")
 
@@ -163,11 +167,11 @@ while True:
 
 
                 
-                if(package_given_choice == 3): # if the user wants to save the package in a CSV-file
+                if(package_given_choice == 3): # if the user wants to save the package in a Excel-file
 
-                    csv_name = str(input("What should the csv-file be called?: "))
+                    excel_name = str(input(colored("What should the Excel-file be called? (remember the .xlsx extension): ", "yellow"))) # name of the file
 
-                    abroad_package.to_csv(csv_name)
+                    abroad_package.to_excel(excel_name)
 
                     print("The package has been saved")
 
@@ -186,7 +190,7 @@ while True:
 
                 print("-------------------------------", colored("What do you want to do with the given package?", "green"), "---------------------")
 
-                package_given_menu = ["Save the package", "Edit the package", "Save it in a CSV-file", "Nothing, go back to main menu"]
+                package_given_menu = ["Save the package", "Edit the package", "Save it in a Excel-file", "Nothing, go back to main menu"]
 
                 package_given_choice = displayMenu(package_given_menu)
 
@@ -200,11 +204,11 @@ while True:
                     edit_package(not_abroad_package)
 
                 
-                if(package_given_choice == 3): # if the user wants to save the package in a CSV-file
+                if(package_given_choice == 3): # if the user wants to save the package in a Excel-file
                     
-                    csv_name = str(input("What should the csv-file be called?: "))
+                    excel_name = str(input(colored("What should the Excel-file be called? (remember the .xlsx extension): ", "yellow"))) # name of the file
 
-                    not_abroad_package.to_csv(csv_name)
+                    not_abroad_package.to_excel(excel_name)
 
                     print("The package has been saved")
                 
@@ -213,6 +217,48 @@ while True:
             if(holiday_location_choice == 3): # if the holiday is both abroad and not abroad.
 
                 placeholder = 2
+        
+        if(holiday_choice == 2): # if the user picks skiing holiday
+            
+            # Ask for how long the holiday will last
+
+            number_of_days = int(input(colored(" How long is your holiday in days? ", "yellow"))) # we ask the number of days the holiday last
+
+            
+            print("-------------------------------", colored("Which type of gear will you have / need during your skiing holiday?", "green"), "---------------------")
+
+            # Is it Ski / Snowboard (or maybe both?)
+
+            type_options = ["Ski", "Snowboard", "BOTH", "Cancel"]
+
+            type_choice = displayMenu(type_options) - 1 # Our indexer
+
+            print("-------------------------------", colored("What transportation will be used?", "green"), "---------------------")
+
+            # what type of transport will be used?
+
+            ski_transport_options = ["Boat", "Boat and car", "Plane", "Car", "Cancel"]
+
+            ski_transport_choice = displayMenu(ski_transport_options) - 1 # Our indexer
+
+
+            print("-------------------------------", colored("How do you plan on staying during your holiday?", "green"), "---------------------")
+
+            ski_stay_options = ["Hut", "Hotel / Hostel", "Other", "Cancel"]
+
+            ski_stay_choice = displayMenu(ski_stay_options) - 1 # Our indexer
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     if(choice == 2): # if the user picks saved holiday packages
