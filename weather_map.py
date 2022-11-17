@@ -94,6 +94,8 @@ def map_creator():
     return(coordinates) # We return the latitude and longitude from our list, respectively
 
 
+map_creator()
+
 
 #options = ["hello", "what", "I"]
 
