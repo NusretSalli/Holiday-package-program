@@ -32,6 +32,8 @@ from save_package import save_package # our save_package function
 
 ### ----------------------------------------------------- SAVED PACKGAGES --------------------------------------------------###
 
+# TODO - functionize this part, to make it more clean
+
 # we create our saved / stored package
 
 stored_package = {}
@@ -55,8 +57,6 @@ else: # if the stored package is not empty
     saved_package_dict = stored_package 
 
     saved_package_menu = saved_package_dict
-
-
 
 ###------------------------------------------------------- MENU ------------------------------------------------------------###
 

@@ -316,6 +316,7 @@ def Weather(location, map):
     # we print that taking the correct clothes is necessary
     print(colored("* Therefore take suitable clothes for these weathers","yellow"))
 
+    # TODO - make some statistical analysis to summarize the data
 
     return
     
