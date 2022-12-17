@@ -29,8 +29,6 @@ import pickle # to store the saved packages
 
 import PackageCreation # the package-organizer function
 
-
-
 def map_creator():
 
     coordinates = []
@@ -47,8 +45,6 @@ def map_creator():
 
     map = tkintermapview.TkinterMapView(root_tk, width=1200, height=1200, corner_radius=0) # size of the map
 
-    #map.pack(fill="both", expand=True)
-
     map.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER) # the placement of the map
 
     # set current widget position and zoom
@@ -63,7 +59,7 @@ def map_creator():
 
         if(len(coordinates) == 0): # checking if we have placed a marker or not
 
-            marker = map.set_marker(coords[0], coords[1])
+            marker = map.set_marker(coords[0], coords[1],"Holiday location")
 
             coordinates.append(coords[0])
 
@@ -89,13 +85,10 @@ def map_creator():
 
     map.add_left_click_map_command(left_click_event) # We implement the command
 
+    
     root_tk.mainloop() # We "terminate" the Tkinter-window
 
     return(coordinates) # We return the latitude and longitude from our list, respectively
-
-
-map_creator()
-
 
 #options = ["hello", "what", "I"]
 
