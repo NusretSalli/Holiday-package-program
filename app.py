@@ -22,7 +22,7 @@ def packages():
 
 
 
-@app.route("\register")
+@app.route("/register")
 
 def register():
 
