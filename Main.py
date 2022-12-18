@@ -161,7 +161,7 @@ while True:
                     if(edited_options_choice == 3): # if the user wants to go back to main menu.
 
                         pass
-                    
+
                 
                 if(package_given_choice == 3): # if the user wants to save the package in a Excel-file
 
@@ -245,7 +245,15 @@ while True:
             ski_stay_choice = displayMenu(ski_stay_options) - 1 # Our indexer
 
 
+            # TODO - implement the ski holiday - look above - functionize it
 
+
+            # TODO - implement the camping holiday as well as the custom holiday function
+
+
+    
+
+    # TODO - implement an option to save your saved package in an excel file.
 
     if(choice == 2): # if the user picks saved holiday packages
 

@@ -6,6 +6,8 @@ from tabulate import tabulate
 from termcolor import colored
 
 
+# TODO - implement temperature and humidity into the package-creation
+
 def essentialCreation(type):
 
     #------------------------------------------------- Essential Package ---------------------------------------------------------#
