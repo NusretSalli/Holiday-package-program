@@ -32,8 +32,6 @@ from save_package import save_package # our save_package function
 
 ### ----------------------------------------------------- SAVED PACKGAGES --------------------------------------------------###
 
-# TODO - functionize this part, to make it more clean
-
 # we create our saved / stored package
 
 stored_package = {}
@@ -151,7 +149,6 @@ while True:
                         save_package(edited_package, saved_package_dict) # using our save_package function
 
 
-
                     if(edited_options_choice == 2): # if the user wants to save the package in a Excel-file
 
                         excel_name = str(input(colored("What should the Excel-file be called? (remember the .xlsx extension): ", "yellow"))) # name of the file
@@ -164,8 +161,7 @@ while True:
                     if(edited_options_choice == 3): # if the user wants to go back to main menu.
 
                         pass
-
-
+                    
                 
                 if(package_given_choice == 3): # if the user wants to save the package in a Excel-file
 
@@ -251,16 +247,6 @@ while True:
 
 
 
-
-
-
-
-
-
-
-
-
-
     if(choice == 2): # if the user picks saved holiday packages
 
         saved_package_list = list(saved_package_menu.keys()) # if there are saved packages, then it will be displayed.
@@ -298,7 +284,6 @@ while True:
                     selected_dataframe = saved_package_dict[selected_key]
 
                     edit_package(selected_dataframe) # using our edit_package function
-      
                         
                     
                 if(package_menu_choice == 3): # if the user wants to delete the package

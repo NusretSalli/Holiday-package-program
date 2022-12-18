@@ -571,8 +571,6 @@ def bigcityCreation(transport):
 
     city_no_flight_dataframe = pd.DataFrame(city_no_flight)
 
-
-
     if(transport == "FLIGHT"):
 
         big_city_package = pd.concat([

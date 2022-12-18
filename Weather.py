@@ -318,7 +318,10 @@ def Weather(location, map):
 
     # TODO - make some statistical analysis to summarize the data
 
-    return
+    return 
+
+
+#print(Weather("London,GB", "NO MAP"))
     
 
 #print(Weather("London, GB", "NO MAP"))
