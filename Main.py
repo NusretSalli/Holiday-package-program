@@ -29,6 +29,8 @@ from edit_package import edit_package
 
 from save_package import save_package # our save_package function
 
+from Holidayque import basic_holiday, ski_holiday, camping_holiday
+
 
 ### ----------------------------------------------------- SAVED PACKGAGES --------------------------------------------------###
 
@@ -76,180 +78,16 @@ while True:
 
         if(holiday_choice == 1): # if the holiday is basic 
 
-            # Ask for how long the holiday will last
-
-            number_of_days = int(input(colored(" How long is your holiday in days? ", "yellow"))) # we ask the number of days the holiday last
-
-            # Now ask wether the holiday is abroad, not abroad or both
-
-            print("-------------------------------", colored("Where is the holiday located?", "green"),"--------------------------------------")
-
-            holiday_location_menu = (["Abroad,", "Not abroad", "Both"]) # User chooses where the holiday takes place
-
-            holiday_location_choice = displayMenu(holiday_location_menu)
-
-            if(holiday_location_choice == 1): # if the holiday is abroad
-
-                location_option = ["Give out the location with a map", "Give out the location by typing it", "Back to main menu"]
-
-                print("-------------------------------", colored("How would you like to give out the location?", "green"),"--------------------------------------")
-
-                location_choice = displayMenu(location_option)
-
-                if(location_choice == 1): # if the user wants to give the location with a map
-
-                    weather_reports = Weather("NO INPUT", "MAP") # using the weather API to get the relevant data with the map
-
-                    abroad_package = PackageCreation.essentialCreation("ABROAD") # we store the pre-made package for ABROAD holidays.
-
-                    print("\n")
-
-                    print(abroad_package.to_markdown())
-                
-                if(location_choice == 2): # if the user wants to give the location by typing it
-
-                    # Asking for the location the holiday will take place
-
-                    location = str(input("Please type in the city and country as this: city, countrycode: ")) # we ask for the location
-
-                    weather_reports = Weather(location, "NO MAP") # using the weather API to get the relevant data
-                    
-                    print("\n")
-
-                    abroad_package = PackageCreation.essentialCreation("ABROAD") # we store the pre-made package for ABROAD holidays.
-
-                    print(abroad_package.to_markdown())
-
-
-                print("-------------------------------", colored("What do you want to do with the given package?", "green"), "---------------------")
-
-                package_given_menu = (["Save the package", "Edit the package", "Save it in a Excel-file", "Nothing, go back to main menu"]) # We ask what the user wants to do with the given package
-
-                package_given_choice = displayMenu(package_given_menu)
-
-                if(package_given_choice == 1): # if the user wants to save the package
-
-                    save_package(abroad_package, saved_package_dict) # using our save_package function
-
-
-                if(package_given_choice == 2): # if the user wants to edit the package
-
-                    edited_package = edit_package(abroad_package)
-
-                    print(edited_package.to_markdown())
-
-                    print("-------------------------------", colored("What do you want to do with the edited package?", "green"), "---------------------")
-
-                    edited_options = ["Save the package", "Save it in a Excel-file", "Nothing, Go back to main menu"]
-
-                    edited_options_choice = displayMenu(edited_options)
-
-                    if(edited_options_choice == 1): # if the user wants to save the package
-
-                        save_package(edited_package, saved_package_dict) # using our save_package function
-
-
-                    if(edited_options_choice == 2): # if the user wants to save the package in a Excel-file
-
-                        excel_name = str(input(colored("What should the Excel-file be called? (remember the .xlsx extension): ", "yellow"))) # name of the file
-
-                        edited_package.to_excel(excel_name)
-
-                        print("The package has been saved")
-
-                    
-                    if(edited_options_choice == 3): # if the user wants to go back to main menu.
-
-                        pass
-
-                
-                if(package_given_choice == 3): # if the user wants to save the package in a Excel-file
-
-                    excel_name = str(input(colored("What should the Excel-file be called? (remember the .xlsx extension): ", "yellow"))) # name of the file
-
-                    abroad_package.to_excel(excel_name)
-
-                    print("The package has been saved")
-
-
-            if(holiday_location_choice == 2): # if the holiday is not abroad
-
-                location = str(input("Please type in the city and country as this: city, countrycode: ")) # Asking for the location the holiday will take place
-
-                weather_reports = Weather(location, "NO") # using the weather API to get the relevant data
-
-                not_abroad_package = PackageCreation.essentialCreation("NOT ABROAD") # storing the pre-made package for NOT ABROAD
-
-                print(not_abroad_package.to_markdown())
-
-                # We ask what the user wants to do with the package
-
-                print("-------------------------------", colored("What do you want to do with the given package?", "green"), "---------------------")
-
-                package_given_menu = ["Save the package", "Edit the package", "Save it in a Excel-file", "Nothing, go back to main menu"]
-
-                package_given_choice = displayMenu(package_given_menu)
-
-                if(package_given_choice == 1): # if the user wants to save the package
-                    
-                    save_package(not_abroad_package, saved_package_dict) # using our save_package function
-
-
-                if(package_given_choice == 2): # if the user wants to edit the package
-
-                    edit_package(not_abroad_package)
-
-                
-                if(package_given_choice == 3): # if the user wants to save the package in a Excel-file
-                    
-                    excel_name = str(input(colored("What should the Excel-file be called? (remember the .xlsx extension): ", "yellow"))) # name of the file
-
-                    not_abroad_package.to_excel(excel_name)
-
-                    print("The package has been saved")
-                
-
-
-            if(holiday_location_choice == 3): # if the holiday is both abroad and not abroad.
-
-                placeholder = 2
+            basic_holiday(saved_package_dict)
         
         if(holiday_choice == 2): # if the user picks skiing holiday
-            
-            # Ask for how long the holiday will last
 
-            number_of_days = int(input(colored(" How long is your holiday in days? ", "yellow"))) # we ask the number of days the holiday last
-
-            
-            print("-------------------------------", colored("Which type of gear will you have / need during your skiing holiday?", "green"), "---------------------")
-
-            # Is it Ski / Snowboard (or maybe both?)
-
-            type_options = ["Ski", "Snowboard", "BOTH", "Cancel"]
-
-            type_choice = displayMenu(type_options) - 1 # Our indexer
-
-            print("-------------------------------", colored("What transportation will be used?", "green"), "---------------------")
-
-            # what type of transport will be used?
-
-            ski_transport_options = ["Boat", "Boat and car", "Plane", "Car", "Cancel"]
-
-            ski_transport_choice = displayMenu(ski_transport_options) - 1 # Our indexer
+            ski_holiday(saved_package_dict)
 
 
-            print("-------------------------------", colored("How do you plan on staying during your holiday?", "green"), "---------------------")
+        if(holiday_choice == 3): # if the user picks camping holiday
 
-            ski_stay_options = ["Hut", "Hotel / Hostel", "Other", "Cancel"]
-
-            ski_stay_choice = displayMenu(ski_stay_options) - 1 # Our indexer
-
-
-            # TODO - implement the ski holiday - look above - functionize it
-
-
-            # TODO - implement the camping holiday as well as the custom holiday function
-
+            camping_holiday(saved_package_dict)
 
     
 
