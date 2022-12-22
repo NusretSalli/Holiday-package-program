@@ -31,6 +31,8 @@ from save_package import save_package # our save_package function
 
 from Holidayque import basic_holiday, ski_holiday, camping_holiday
 
+from excel_saver import excel_saver
+
 
 ### ----------------------------------------------------- SAVED PACKGAGES --------------------------------------------------###
 
@@ -114,7 +116,7 @@ while True:
 
                 # we ask the user what to do with the chosen saved package
 
-                package_menu = ["View the package", "Edit the package", "Delete the package", "Back to main menu"]
+                package_menu = ["View the package", "Edit the package", "Save the package in an excel file", "Delete the package", "Back to main menu"]
 
                 package_menu_choice = displayMenu(package_menu)
 
@@ -130,9 +132,16 @@ while True:
                     selected_dataframe = saved_package_dict[selected_key]
 
                     edit_package(selected_dataframe) # using our edit_package function
-                        
+                
+                if(package_menu_choice == 3): # if the user wants to save the package in an excel-file
+
+                    selected_dataframe = saved_package_dict[selected_key]
+
+                    # TODO - FIX THIS EXCEL SAVER - DOESN'T RUN RIGHT NOW
+
+                    excel_saver(selected_dataframe)
                     
-                if(package_menu_choice == 3): # if the user wants to delete the package
+                if(package_menu_choice == 4): # if the user wants to delete the package
                     
                     # we make a confirmation that the user wants to delete the chosen saved package
 
