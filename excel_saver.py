@@ -34,7 +34,7 @@ def excel_saver(dataframe):
 
         excel_name = str(input(" Name of the xlsx-file "))
 
-        dataframe.to_excel(excel_name)
+        dataframe.to_excel(excel_name, engine = "xlsxwriter")
 
     if excel_choice == 3: # if the user wants to cancel
 

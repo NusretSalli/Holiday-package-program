@@ -91,10 +91,6 @@ while True:
 
             camping_holiday(saved_package_dict)
 
-    
-
-    # TODO - implement an option to save your saved package in an excel file.
-
     if(choice == 2): # if the user picks saved holiday packages
 
         saved_package_list = list(saved_package_menu.keys()) # if there are saved packages, then it will be displayed.
@@ -136,8 +132,6 @@ while True:
                 if(package_menu_choice == 3): # if the user wants to save the package in an excel-file
 
                     selected_dataframe = saved_package_dict[selected_key]
-
-                    # TODO - FIX THIS EXCEL SAVER - DOESN'T RUN RIGHT NOW
 
                     excel_saver(selected_dataframe)
                     
