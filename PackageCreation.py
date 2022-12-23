@@ -551,6 +551,9 @@ def campingCreation(activity, stay_camp):
         return(camping_package)
 
 
+
+# TODO - implement the bigcityCreation and use it in Main
+
 def bigcityCreation(transport):
 
     # ------------------------------------------------------- Big city holiday --------------------------------------------------#

@@ -304,7 +304,25 @@ def ski_holiday(saved_package_dict):
 
     number_of_days = int(input(colored(" How long is your holiday in days? ", "yellow"))) # we ask the number of days the holiday last
 
+
+    # TODO - we need to do something with the weather reports - incorporate them in here
     
+    location_option = ["Give out the location with a map", "Give out the location by typing it", "Back to main menu"]
+
+    location_choice = displayMenu(location_option)
+
+    if location_choice == 1: # give location with map
+
+        weather_reports = Weather("NO INPUT", "MAP") # using the weather API to get the relevant data with the map
+
+    
+    if location_choice == 2: # give location as a text of string
+
+        location = str(input("Please type in the city and country as this: city, countrycode: ")) # we ask for the location
+
+        weather_reports = Weather(location, "NO MAP") # using the weather API to get the relevant data
+
+
     print("-------------------------------", colored("Which type of gear will you have / need during your skiing holiday?", "green"), "---------------------")
 
     # Is it Ski / Snowboard (or maybe both?)
@@ -316,7 +334,6 @@ def ski_holiday(saved_package_dict):
     if type_choice == 3: # if we pick "cancel"
 
         pass
-
 
     print("-------------------------------", colored("What transportation will be used?", "green"), "---------------------")
 
@@ -338,7 +355,7 @@ def ski_holiday(saved_package_dict):
 
         ski_stay_choice = int(displayMenu(ski_stay_options) - 1) # Our indexer
 
-        if ski_stay_choice == 4: # if the user picks "cancel"
+        if ski_stay_choice == 4: # If the user picks "cancel"
 
             pass
         
@@ -409,6 +426,22 @@ def camping_holiday(saved_package_dict):
 
     number_of_days = int(input(colored(" How long is your holiday in days? ", "yellow"))) # we ask the number of days the holiday last
 
+    # TODO - we need to do something with the weather reports - incorporate them in here
+
+    location_option = ["Give out the location with a map", "Give out the location by typing it", "Back to main menu"]
+
+    location_choice = displayMenu(location_option)
+
+    if location_choice == 1: # give location with map
+
+        weather_reports = Weather("NO INPUT", "MAP") # using the weather API to get the relevant data with the map
+
+    
+    if location_choice == 2: # give location as a text of string
+
+        location = str(input("Please type in the city and country as this: city, countrycode: ")) # we ask for the location
+
+        weather_reports = Weather(location, "NO MAP") # using the weather API to get the relevant data
     
     print("-------------------------------", colored("what type of activity will you be doing during your holiday?", "green"), "---------------------")
 
@@ -490,3 +523,8 @@ def camping_holiday(saved_package_dict):
         camping_package.to_excel(excel_name)
 
         print("The package has been saved")
+
+
+def big_city_holiday(saved_package_dict):
+
+    placeholder = 2

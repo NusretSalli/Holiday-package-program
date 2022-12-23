@@ -25,8 +25,16 @@ def excel_saver(dataframe):
 
         # TODO - MAKE THIS LATER
 
-        placeholder = 2
+        excel_name_existing = str(input(" Name of the existing excel-file you want to save the package to? "))
 
+        sheet_name = str(input(" What should the sheet be called? "))
+
+        # appending the dataframe to the sheet_name sheet
+
+        with pd.ExcelWriter(excel_name_existing, mode='A') as writer:  
+            dataframe.to_excel(writer, sheet_name=sheet_name)
+
+        print(f"The dataframe has been saved to {excel_name_existing} under the sheet: {sheet_name}")
 
     if excel_choice == 2: # if the user wants to save the package in a new excel file
 
@@ -35,6 +43,8 @@ def excel_saver(dataframe):
         excel_name = str(input(" Name of the xlsx-file "))
 
         dataframe.to_excel(excel_name, engine = "xlsxwriter")
+
+        print(f"the dataframe has been saved to {excel_name}")
 
     if excel_choice == 3: # if the user wants to cancel
 
