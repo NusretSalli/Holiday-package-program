@@ -6,15 +6,28 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods = ["GET", "POST"])
 
 def hello_world():
 
-    return "hello world!!!"
+    return "HEHE"
 
-@app.route("/login")
+@app.route("/login", methods = ["GET","POST"])
 
 def login():
+
+    if request.method == 'POST':
+        if request.form.get('action1') == 'VALUE1':
+            pass # do something
+        
+        elif  request.form.get('action2') == 'VALUE2':
+            pass # do something else
+        
+        else:
+            pass # unknown
+        
+    elif request.method == 'GET':
+        return render_template('login.html')
 
     return render_template("login.html")
 
