@@ -90,7 +90,6 @@ def map_creator():
 
     return(coordinates) # We return the latitude and longitude from our list, respectively
 
-
 # FIXME - fix the tkinter 
 
 
@@ -100,6 +99,7 @@ def map_creator():
     
     #print(colored("{:d}. {:s}".format(i+1, options[i]),"magenta"))
     
+
 #choice = 0
 
 #option_list = list(range(1,len(options)+1))
